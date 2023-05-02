@@ -1,5 +1,5 @@
 #!/bin/bash
-# modified 2021-09-27
+# modified 2023-05-02
 # author Herman Tolentino
 if [[ ! -f .env ]]; then
     echo "Copying environment template..."
@@ -95,15 +95,15 @@ echo "JUPYTERHUB_SSL = $JUPYTERHUB_SSL"
 case $JUPYTERHUB_SSL in
     no_ssl)
         echo "Shutting down JupyterHub..."
-        COMPOSE_DOCKER_CLI_BUILD=$COMPOSE_DOCKER_CLI_BUILD docker-compose -f docker-compose.yml down
+        COMPOSE_DOCKER_CLI_BUILD=$COMPOSE_DOCKER_CLI_BUILD docker compose -f docker-compose.yml down
         ;;
     use_ssl_ss)
         echo "Shutting down JupyterHub..."
-        COMPOSE_DOCKER_CLI_BUILD=$COMPOSE_DOCKER_CLI_BUILD docker-compose -f docker-compose.yml down
+        COMPOSE_DOCKER_CLI_BUILD=$COMPOSE_DOCKER_CLI_BUILD docker compose -f docker-compose.yml down
         ;;
     use_ssl_le)
         echo "Shutting down JupyterHub-LetsEncrypt..."
-        COMPOSE_DOCKER_CLI_BUILD=$COMPOSE_DOCKER_CLI_BUILD docker-compose -f docker-compose-letsencrypt.yml down
+        COMPOSE_DOCKER_CLI_BUILD=$COMPOSE_DOCKER_CLI_BUILD docker compose -f docker-compose-letsencrypt.yml down
         ;;
 esac
 # Get jupyterhub host IP address
@@ -119,7 +119,7 @@ echo "JUPYTERHUB_SSL = $JUPYTERHUB_SSL"
 case $JUPYTERHUB_SSL in
     no_ssl)
     echo "Starting up JupyterHub..."
-    COMPOSE_DOCKER_CLI_BUILD=$COMPOSE_DOCKER_CLI_BUILD docker-compose up -d
+    COMPOSE_DOCKER_CLI_BUILD=$COMPOSE_DOCKER_CLI_BUILD docker compose up -d
         ;;
     use_ssl_ss)
         echo "Starting up JupyterHub..."
@@ -127,7 +127,7 @@ case $JUPYTERHUB_SSL in
         ;;
     use_ssl_le)
         echo "Starting up JupyterHub-LetsEncrypt..."
-        COMPOSE_DOCKER_CLI_BUILD=$COMPOSE_DOCKER_CLI_BUILD docker-compose -f docker-compose-letsencrypt.yml up -d
+        COMPOSE_DOCKER_CLI_BUILD=$COMPOSE_DOCKER_CLI_BUILD docker compose -f docker-compose-letsencrypt.yml up -d
         sleep 10
         ;;
 esac
@@ -156,15 +156,15 @@ echo "JUPYTERHUB_SSL = $JUPYTERHUB_SSL"
 case $JUPYTERHUB_SSL in
     no_ssl)
         echo "Rebuilding JupyterHub..."
-        COMPOSE_DOCKER_CLI_BUILD=$COMPOSE_DOCKER_CLI_BUILD docker-compose -f docker-compose.yml $DOCKER_BUILD_CACHE_OPTION build
+        COMPOSE_DOCKER_CLI_BUILD=$COMPOSE_DOCKER_CLI_BUILD docker compose -f docker-compose.yml $DOCKER_BUILD_CACHE_OPTION build
         ;;
     use_ssl_ss)
         echo "Rebuilding JupyterHub..."
-        COMPOSE_DOCKER_CLI_BUILD=$COMPOSE_DOCKER_CLI_BUILD docker-compose -f docker-compose.yml $DOCKER_BUILD_CACHE_OPTION build
+        COMPOSE_DOCKER_CLI_BUILD=$COMPOSE_DOCKER_CLI_BUILD docker compose -f docker-compose.yml $DOCKER_BUILD_CACHE_OPTION build
         ;;
     use_ssl_le)
         echo "Rebuilding JupyterHub-LetsEncrypt..."
-        COMPOSE_DOCKER_CLI_BUILD=$COMPOSE_DOCKER_CLI_BUILD docker-compose -f docker-compose-letsencrypt.yml $DOCKER_BUILD_CACHE_OPTION build
+        COMPOSE_DOCKER_CLI_BUILD=$COMPOSE_DOCKER_CLI_BUILD docker compose -f docker-compose-letsencrypt.yml $DOCKER_BUILD_CACHE_OPTION build
         ;;
 esac
 
